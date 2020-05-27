@@ -1,6 +1,10 @@
 from django.db import models
 
 class Advert(models.Model):
+    '''
+    Модель Advert, для хранения информации рекламного
+    обьявления
+    '''
     title = models.CharField(verbose_name='заглавие', max_length=20)
     text = models.TextField(verbose_name='Текст обьявления', null=True)
     phone = models.CharField(verbose_name='Телефон', max_length=15, null=True, blank=True)
