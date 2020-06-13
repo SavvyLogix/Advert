@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
 from .forms import AdvertForm
-from .models import Advert
+from .models import Advert, Photo
+
 
 class AdvertListView(generic.ListView):
     queryset = Advert.objects.all()
@@ -13,6 +14,11 @@ class AdvertDetailView(generic.DetailView):
     model = Advert
     template_name = 'main/advertdetail.html'
     context_object_name = 'adv'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['photo'] = Photo.objects.filter(advert=self.kwargs['pk'])
+        return context
 
 class AdvertCreate(generic.CreateView):
     ''' Создание нового обьявления '''

@@ -28,3 +28,9 @@ class Advert(models.Model):
     def get_DeleteUrl(self):
         return reverse('adv_delete', kwargs={'pk':self.pk})
 
+class Photo(models.Model):
+    title=models.CharField(verbose_name='Описание', max_length=30, blank=True, null=True)
+    image=models.ImageField(verbose_name='Фотография', upload_to='gallery/')
+    advert=models.ForeignKey(Advert, verbose_name='Обьявление', on_delete=models.CASCADE)
+
+

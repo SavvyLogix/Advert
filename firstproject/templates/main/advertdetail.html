@@ -2,6 +2,12 @@
 
 {% block content %}
 
+<p>
+  {% for item in photo %}
+    <img src="{{ item.image.url }}" style="width:200px; height:200px;"
+  {% endfor %}
+</p>
+
 <div class="card">
   <div class="card-header">{{ adv.date }}</div>
   <div class="card-body">
