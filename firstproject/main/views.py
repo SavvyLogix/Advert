@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views import generic
 from .forms import AdvertForm
 from .models import Advert, Photo
@@ -8,6 +7,7 @@ class AdvertListView(generic.ListView):
     queryset = Advert.objects.all()
     template_name = 'main/advertlist.html'
     context_object_name = 'adv'
+    paginate_by = 2
 
 class AdvertDetailView(generic.DetailView):
     ''' Детализированная форма обьявления '''

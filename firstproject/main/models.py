@@ -15,6 +15,7 @@ class Advert(models.Model):
     class Meta:
         verbose_name = 'Обьявление'
         verbose_name_plural = 'Обьявления'
+        ordering=['-date']
 
     def get_detailUrl(self):
         return reverse('adv_detail', kwargs={'pk':self.pk})
