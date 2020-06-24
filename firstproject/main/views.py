@@ -7,7 +7,7 @@ class AdvertListView(generic.ListView):
     queryset = Advert.objects.all()
     template_name = 'main/advertlist.html'
     context_object_name = 'adv'
-    paginate_by = 2
+    paginate_by = 4
 
 class AdvertDetailView(generic.DetailView):
     ''' Детализированная форма обьявления '''
