@@ -6,6 +6,7 @@ from django.urls import reverse
 
 
 class Profile(models.Model):
+    ''' Расширение профиля пользователя '''
     user = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE)
     first_name = models.CharField(blank=True, null=True, max_length=15, verbose_name='Имя пользователя')
     last_name = models.CharField(blank=True, null=True, max_length=15, verbose_name='Фамилия')
