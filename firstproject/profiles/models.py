@@ -8,12 +8,14 @@ from django.urls import reverse
 class Profile(models.Model):
     ''' Расширение профиля пользователя '''
     user = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE)
-    first_name = models.CharField(blank=True, null=True, max_length=15, verbose_name='Имя пользователя')
-    last_name = models.CharField(blank=True, null=True, max_length=15, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=15, verbose_name='Имя пользователя')
+    last_name = models.CharField(max_length=15, verbose_name='Фамилия')
     avatar = models.ImageField(verbose_name='Avatar',
                                default='profiles/avatar.png',
                                upload_to='profiles/', null=True, blank=True)
     phone = models.CharField(blank=True, null=True, max_length=15, verbose_name='Номер телефона')
+    #email = models.EmailField(max_length=30, verbose_name='Email')
+    #birthday = models.DateTimeField(max_length=10, verbose_name='Дата рождения')
 
     class Meta:
         verbose_name = 'Профиль'
