@@ -9,6 +9,10 @@ def get_path_image(uname, iname):
     path = str(uname).lower() + '/' + str(iname)
     return path
 
+class Gallery(models.Model):
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    title = models.CharField(verbose_name='Описание', max_length=70, blank=True, null=True)
+
 class Advert(models.Model):
     '''
     Модель Advert, для хранения информации рекламного
@@ -19,6 +23,7 @@ class Advert(models.Model):
     phone = models.CharField(verbose_name='Телефон', max_length=15, null=True, blank=True)
     email = models.EmailField(verbose_name='Email', max_length=30, null=True)
     date = models.DateTimeField(auto_now_add=True)
+    gallery = models.ForeignKey(Gallery, verbose_name='Галерея', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Обьявление'
@@ -38,10 +43,11 @@ class Advert(models.Model):
         return reverse('adv_delete', kwargs={'pk':self.pk})
 
 class Photo(models.Model):
-    title=models.CharField(verbose_name='Описание', max_length=30, blank=True, null=True)
-    image=models.ImageField(verbose_name='Фотография', upload_to='gallery/')
-    advert=models.ForeignKey(Advert, verbose_name='Обьявление', on_delete=models.CASCADE)
-    user=models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    title = models.CharField(verbose_name='Описание', max_length=30, blank=True, null=True)
+    image = models.ImageField(verbose_name='Фотография', upload_to='gallery/')
+    #advert = models.ForeignKey(Advert, verbose_name='Обьявление', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    gallery = models.ForeignKey(Gallery, verbose_name='Галерея', on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         ''' Переопределяю метод save чтобы изменить значения image.name '''

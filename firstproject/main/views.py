@@ -1,6 +1,6 @@
 from django.views import generic
 from .forms import AdvertForm
-from .models import Advert, Photo
+from .models import Advert, Photo, Gallery
 
 
 class AdvertListView(generic.ListView):
@@ -16,8 +16,11 @@ class AdvertDetailView(generic.DetailView):
     context_object_name = 'adv'
 
     def get_context_data(self, **kwargs):
+        pk = self.kwargs['pk']
+        qsetAdvert = Advert.objects.values('gallery_id').filter(pk=pk)
+        gallery = qsetAdvert.get().get('gallery_id')
         context = super().get_context_data(**kwargs)
-        context['photo'] = Photo.objects.filter(advert=self.kwargs['pk'])
+        context['photo'] = Photo.objects.filter(gallery=gallery)
         return context
 
 class AdvertCreate(generic.CreateView):
@@ -38,6 +41,11 @@ class AdvertDelete(generic.DeleteView):
     context_object_name = 'adv'
     template_name = 'main/advert_confirm_delete.html'
     success_url = '/'
+
+class GalleryCreateView(generic.CreateView):
+    model = Gallery
+    context_object_name = 'gallery'
+    template_name = 'main/gallery_create.html'
 
 
 

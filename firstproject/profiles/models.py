@@ -32,3 +32,4 @@ class Profile(models.Model):
     @receiver
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+

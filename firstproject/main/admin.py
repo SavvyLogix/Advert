@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Advert, Photo
+from .models import Advert, Photo, Gallery
 ''' Нужно импортировать модель, чтобы она была тут доступна '''
 
 admin.site.register(Advert)
@@ -8,6 +8,8 @@ admin.site.register(Advert)
 @admin.register(Photo)
 class AdvertAdmin(admin.ModelAdmin):
     search_fields = ['title']
-    list_filter = ('advert',)
+#    list_filter = ('advert',)
 ''' Подключаем нашу модель Photo к админке '''
 
+admin.site.register(Gallery)
+''' Подключаем нашу модель Gallery к админке '''
