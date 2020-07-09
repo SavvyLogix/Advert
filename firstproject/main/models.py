@@ -10,6 +10,9 @@ def get_path_image(uname, iname):
     return path
 
 class Gallery(models.Model):
+    ''' Модель Gallery, для хранения информации
+     с размером в два поля
+    '''
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Описание', max_length=70, blank=True, null=True)
 
