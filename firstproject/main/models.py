@@ -24,7 +24,7 @@ class Advert(models.Model):
     title = models.CharField(verbose_name='заглавие', max_length=50)
     text = models.TextField(verbose_name='Текст обьявления', null=True)
     phone = models.CharField(verbose_name='Телефон', max_length=15, null=True, blank=True)
-    email = models.EmailField(verbose_name='Email', max_length=30, null=True)
+    email = models.EmailField(verbose_name='правильный Email-адрес', max_length=30, null=True)
     date = models.DateTimeField(auto_now_add=True)
     gallery = models.ForeignKey(Gallery, verbose_name='Галерея', on_delete=models.CASCADE)
 
