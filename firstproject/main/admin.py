@@ -8,7 +8,7 @@ admin.site.register(Advert)
 @admin.register(Photo)
 class AdvertAdmin(admin.ModelAdmin):
     search_fields = ['title']
-#    list_filter = ('advert',)
+    list_filter = ('gallery',)
 ''' Подключаем нашу модель Photo к админке '''
 
 admin.site.register(Gallery)
