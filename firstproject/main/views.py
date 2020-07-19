@@ -1,6 +1,8 @@
 from django.views import generic
 from .forms import AdvertForm
 from .models import Advert, Photo, Gallery
+from django.contrib.auth.mixins import LoginRequiredMixin
+from main.permissions import UserIsOwnerOrAdminMixin
 
 
 class AdvertListView(generic.ListView):
@@ -9,7 +11,7 @@ class AdvertListView(generic.ListView):
     context_object_name = 'adv'
     paginate_by = 4
 
-class AdvertDetailView(generic.DetailView):
+class AdvertDetailView(LoginRequiredMixin, generic.DetailView):
     ''' Детализированная форма обьявления '''
     model = Advert
     template_name = 'main/advertdetail.html'
@@ -23,19 +25,19 @@ class AdvertDetailView(generic.DetailView):
         context['photo'] = Photo.objects.filter(gallery=gallery)
         return context
 
-class AdvertCreate(generic.CreateView):
+class AdvertCreate(LoginRequiredMixin, generic.CreateView):
     ''' Создание нового обьявления '''
     form_class = AdvertForm
     template_name = 'main/advertcreate.html'
 
-class AdvertUpdate(generic.UpdateView):
+class AdvertUpdate(UserIsOwnerOrAdminMixin, generic.UpdateView):
     ''' Редактирование обьявления '''
     model = Advert
     form_class = AdvertForm
     template_name = 'main/advertupdate.html'
     context_object_name = 'adv'
 
-class AdvertDelete(generic.DeleteView):
+class AdvertDelete(UserIsOwnerOrAdminMixin, generic.DeleteView):
     ''' Удаление обьявления '''
     model = Advert
     context_object_name = 'adv'

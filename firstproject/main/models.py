@@ -27,6 +27,7 @@ class Advert(models.Model):
     email = models.EmailField(verbose_name='правильный Email-адрес', max_length=30, null=True)
     date = models.DateTimeField(auto_now_add=True)
     gallery = models.ForeignKey(Gallery, verbose_name='Галерея', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Обьявление'
