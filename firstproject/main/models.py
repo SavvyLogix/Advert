@@ -26,7 +26,7 @@ class Advert(models.Model):
     phone = models.CharField(verbose_name='Телефон', max_length=15, null=True, blank=True)
     email = models.EmailField(verbose_name='правильный Email-адрес', max_length=30, null=True)
     date = models.DateTimeField(auto_now_add=True)
-    gallery = models.ForeignKey(Gallery, verbose_name='Галерея', on_delete=models.CASCADE)
+    gallery = models.ForeignKey(Gallery, verbose_name='Галерея', on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     class Meta:
