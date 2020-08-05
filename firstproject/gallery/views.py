@@ -1,6 +1,5 @@
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main.permissions import UserIsOwnerOrAdminMixin
 from main.models import Gallery
 from django.http import HttpResponseRedirect
 from .forms import GalleryForm
