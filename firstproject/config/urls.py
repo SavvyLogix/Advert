@@ -6,6 +6,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('gallery/', include('gallery.urls')),
     path('', include('main.urls')), #подключаем файл urls.py из приложения main
 
 ]

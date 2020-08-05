@@ -63,8 +63,3 @@ class AdvertDelete(UserIsOwnerOrAdminMixin, generic.DeleteView):
     success_url = '/'
 
 
-class GalleryCreateView(generic.CreateView):
-    ''' Добавление галереи '''
-    model = Gallery
-    context_object_name = 'gallery'
-    template_name = 'main/gallery_create.html'

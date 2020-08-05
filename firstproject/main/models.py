@@ -16,6 +16,15 @@ class Gallery(models.Model):
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Описание', max_length=70, blank=True, null=True)
 
+    class Meta:
+        ordering = ['title']
+
+    def get_detailUrl(self):
+        return reverse('gallery_update', kwargs={'pk':self.pk})
+
+    def get_deleteUrl(self):
+        return reverse('gallery_delete', kwargs={'pk':self.pk})
+
 class Advert(models.Model):
     '''
     Модель Advert, для хранения информации рекламного
@@ -47,6 +56,10 @@ class Advert(models.Model):
         return reverse('adv_delete', kwargs={'pk':self.pk})
 
 class Photo(models.Model):
+    '''
+    Модель Photo, для хранения информации о
+    фотографиях
+    '''
     title = models.CharField(verbose_name='Описание', max_length=30, blank=True, null=True)
     image = models.ImageField(verbose_name='Фотография', upload_to='gallery/')
     #advert = models.ForeignKey(Advert, verbose_name='Обьявление', on_delete=models.CASCADE)

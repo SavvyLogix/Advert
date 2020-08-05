@@ -20,20 +20,21 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Ссылка</a>
       </li>
+        {% if user.is_authenticated %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Меню доступных действий
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="nav-link disabled" href="{% url 'adv_create' %}">Создать обьявление</a>
-          <a class="dropdown-item" href="#">Другое действие</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Что-то еще</a>
+          <a class="dropdown-item" href="{% url 'adv_create' %}">Новое обьявление</a>
+            <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'gallery_list' %}">Мои галереи</a>
+              <a class="dropdown-item" href="{% url 'gallery_create' %}">Новая галерея</a>
+            <div class="dropdown-divider"></div>
+          <a class="dropdown-item disabled" href="#">Что-то еще</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Заблокировано</a>
-      </li>
+        {% endif %}
     </ul>
     &nbsp;
     {% if user.is_authenticated %}
@@ -49,8 +50,9 @@
     {% if user.is_authenticated %}
         <span><b> &nbsp;{{ user.username }}&nbsp; </b></span>
         <a class="nav-link" href="{% url 'account_logout' %}">Выйти</a>
-    {% else %}<a class="nav-link" href="{% url 'account_login' %}">Вход</a>
-            <a class="nav-link" href="{% url 'account_signup' %}">Регистрация</a>
+    {% else %}
+        <a class="nav-link" href="{% url 'account_login' %}">Вход</a>
+        <a class="nav-link" href="{% url 'account_signup' %}">Регистрация</a>
     {% endif %}
 
 

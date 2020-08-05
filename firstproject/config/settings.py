@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'main',
     'profiles',
-
     'allauth',
     'allauth.account',
+    'gallery',
 
 ]
 
