@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.views import generic
 from .forms import AdvertForm
-from .models import Advert, Photo, Gallery
+from .models import Advert, Photo
 from django.contrib.auth.mixins import LoginRequiredMixin
 from main.permissions import UserIsOwnerOrAdminMixin
 
