@@ -5,7 +5,7 @@
 <div id="carouselAdvertGalleryList" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         {% for item in photo %}
-        <div data-interval="4000" class="carousel-item text-center text-light mb-5
+        <div data-interval="2000" class="carousel-item text-center text-light mb-5
           {% if forloop.first %} active{% endif %}">
             <img src="{{ item.image.url }}" style="width:600px; height:400px;">
             <div class="carousel-caption capt">
