@@ -7,6 +7,7 @@ from main.permissions import UserIsOwnerOrAdminMixin
 
 
 class AdvertListView(generic.ListView):
+    ''' Список обьявлений '''
     queryset = Advert.objects.all()
     template_name = 'main/advertlist.html'
     context_object_name = 'adv'
@@ -48,11 +49,18 @@ class AdvertCreate(LoginRequiredMixin, generic.CreateView):
 
 class AdvertUpdate(UserIsOwnerOrAdminMixin, generic.UpdateView):
     ''' Редактирование обьявления '''
-    model = Advert
-    form_class = AdvertForm
+    permission_required = 'firstproject.nge_advert'
     template_name = 'main/advertupdate.html'
-    context_object_name = 'adv'
-    form_class.user = 1 #todo не забыть исправить заглаушки
+    form_class = AdvertForm
+
+    def get_queryset(self):
+        queryset = Advert.objects.filter(pk=self.kwargs['pk'])
+        return queryset
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.user = self.request.user
+        return form
 
 
 class AdvertDelete(UserIsOwnerOrAdminMixin, generic.DeleteView):

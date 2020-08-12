@@ -10,11 +10,7 @@
             {{ field.errors }}
         </div>
         {% endif %}
-        {% if field.name == 'gallery' %}
         {{ field.label }}{{ field }}
-        {% else %}
-        {{ field.label }}{{ field }}
-        {% endif %}
     </div>
     {% endfor %}
     <div class="form-group col-md-6">
