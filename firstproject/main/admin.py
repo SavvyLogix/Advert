@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Advert, Photo, Gallery
-''' Нужно импортировать модель, чтобы она была тут доступна '''
+''' Нужно импортировать модели, чтобы они были тут доступны '''
 
 admin.site.register(Advert)
 ''' Подключаем нашу модель Advert к админке '''
