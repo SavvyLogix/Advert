@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.views import generic
+from gallery.forms import PhotoCreateForm
 from .forms import AdvertForm
 from .models import Advert, Photo
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -69,5 +70,41 @@ class AdvertDelete(UserIsOwnerOrAdminMixin, generic.DeleteView):
     context_object_name = 'adv'
     template_name = 'main/advert_confirm_delete.html'
     success_url = '/'
+
+class PhotoGalleryCreate(generic.CreateView):
+    ''' Добавление фото в галерею '''
+    template_name = 'gallery/photo_create.html'
+
+    def get_form(self, form_class=PhotoCreateForm):
+        form = PhotoCreateForm(user=self.request.user)
+        return form
+
+    def post(self, request, *args, **kwargs):
+        bindform = PhotoCreateForm(request.user, request.POST, files=request.FILES)
+        print('bindform.data =========>', bindform.data)
+        gallery = bindform.data['gallery']
+        if bindform.is_valid():
+            post = bindform.save(commit=False)
+            post.user = request.user
+            post.save()
+        else:
+            print('errors ==========>', bindform.errors)
+        return HttpResponseRedirect('/gallery/photolist/{}'.format(gallery))
+
+class PhotoGalleryList(generic.ListView):
+    ''' Список фотографий в галерее '''
+    template_name = 'gallery/photo_list.html'
+    context_object_name = 'photolist'
+    paginate_by = 5
+
+    def get_queryset(self):
+        queryset = Photo.objects.filter(gallery=self.kwargs['pk'])
+        return queryset
+
+class PhotoDelete(generic.DeleteView):
+    ''' Удаление фотографий из галереи '''
+    model = Photo
+    template_name = 'gallery/photo_delete.html'
+    success_url = '/gallery/list/'
 
 

@@ -2,14 +2,20 @@ from django.contrib import admin
 from .models import Advert, Photo, Gallery
 ''' Нужно импортировать модели, чтобы они были тут доступны '''
 
-admin.site.register(Advert)
+@admin.register(Advert)
+class AdvertAdmin(admin.ModelAdmin):
+    search_fields = ['title', 'text', 'email']
+    list_filter = ('user',)
 ''' Подключаем нашу модель Advert к админке '''
 
 @admin.register(Photo)
-class AdvertAdmin(admin.ModelAdmin):
+class PhotoAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_filter = ('gallery',)
 ''' Подключаем нашу модель Photo к админке '''
 
-admin.site.register(Gallery)
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    search_fields = ['title']
+    list_filter = ('user',)
 ''' Подключаем нашу модель Gallery к админке '''
