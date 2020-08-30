@@ -5,14 +5,29 @@ from .forms import AdvertForm
 from .models import Advert, Photo
 from django.contrib.auth.mixins import LoginRequiredMixin
 from main.permissions import UserIsOwnerOrAdminMixin
+from django.db.models import Q
 
 
 class AdvertListView(generic.ListView):
     ''' Список обьявлений '''
-    queryset = Advert.objects.all()
+    # queryset = Advert.objects.all()
     template_name = 'main/advertlist.html'
     context_object_name = 'adv'
     paginate_by = 4
+
+    def get_queryset(self):
+        if self.request.GET.get('val'):
+            value = self.request.GET.get('val')
+            queryset = Advert.objects.filter(Q(text__contains=value) | Q(title__contains=value))
+        else:
+            queryset = Advert.objects.all()
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        val = self.request.GET.get('val')
+        context['search'] = val
+        return context
 
 
 class AdvertDetailView(LoginRequiredMixin, generic.DetailView):

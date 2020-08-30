@@ -43,8 +43,8 @@
     {% endif %}
     &nbsp;
     &nbsp;
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Начните ввод" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="{% url 'adv_list' %}" method="get">
+      <input class="form-control mr-sm-2" name="val" type="search" placeholder="Начните ввод" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
     </form>
     &nbsp;
