@@ -19,7 +19,7 @@
         </li>
         {% endif %}
 
-        {% for n in paginator.page_range %} <!--Цикл по колличеству страниц-->
+        {% for n in paginator.page_range %} <!--Цикл по количеству страниц-->
         {% if page_obj.number == n %} <!--Если это текущая страница-->
         <li class="page-item active" aria-current="page">
             <a class="page-link" href="#">{{ n }}<span class="sr-only">(current)</span></a>
