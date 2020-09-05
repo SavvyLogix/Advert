@@ -5,8 +5,13 @@
 
         {% if page_obj.has_previous %} <!--Если есть предыдущая страница-->
         <li class="page-item">
+            {% if search %}
+            <a class="page-link" href="{{ request.path }}?val={{search}}&page={{ page_obj.previous_page_number }}" tabindex="-1"
+               aria-disabled="true">Previous</a>
+            {% else %}
             <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}" tabindex="-1"
                aria-disabled="true">Previous</a>
+            {% endif %}
         </li>
         {% else %} <!--Если нет предыдущей страницы-->
         <li class="page-item disabled">
@@ -20,13 +25,21 @@
             <a class="page-link" href="#">{{ n }}<span class="sr-only">(current)</span></a>
         </li>
         {% else %} <!--Если это не текущая страница-->
-        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+        {% if search %}
+        <li class="page-item"><a class="page-link" href="{{ request.path }}?val={{search}}&page={{ n }}">{{ n }}</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="{{ request.path }}?page={{ n }}">{{ n }}</a></li>
+        {% endif %}
         {% endif %}
         {% endfor %}
 
         {% if page_obj.has_next %} <!--Если есть следующая страница-->
         <li class="page-item">
+            {% if search %}
+            <a class="page-link" href="{{ request.path }}?val={{search}}&page={{ page_obj.next_page_number }}">Next</a>
+            {% else %}
             <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
         </li>
         {% else %} <!--Если нету следующей страницы-->
         <li class="page-item disabled">
